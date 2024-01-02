@@ -1,0 +1,8 @@
+def hash_function(string):
+    hash_value = 0
+    prime = 31  #選一個素數
+
+    for char in string:
+        hash_value = (hash_value * prime + ord(char)) % (10**9 + 7)  # 取模，限制範圍
+
+    return hash_value
