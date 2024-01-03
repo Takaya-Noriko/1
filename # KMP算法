@@ -1,0 +1,26 @@
+#生成next数组
+def generateNext(p):
+    m = len(p)
+    next = [0 for _ in range(m)]
+    left = 0
+    for right in range(1, m):
+        while left > 0 and p[left] != p[right]:
+            left = next[left - 1]
+        if p[left] == p[right]:
+            left += 1
+        next[right] = left
+    return next
+
+# KMP算法
+def kmp(T,p):
+    n,m = len(T),len(p)
+    next = generateNext(p)
+    j = 0
+    for i in range(n):
+        while j > 0 and T[i] != p[j]:
+            j = next[j - 1]
+        if T[i] == p[j]:
+            j += 1
+        if j == m:
+            return i - j + 1
+    return -1
